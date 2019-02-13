@@ -36,7 +36,7 @@ max_decrease = min(average_change)
 max_month = average_change.index(max_increase) + 1
 min_month = average_change.index(max_decrease) + 1
 
-# Print out stats for budget data 
+# Print out stats for Budget data 
 print("Financial Analysis")
 print("----------------------------")
 print(f"Total Months: {len(months)}")
@@ -46,11 +46,14 @@ print(f"Greatest Increase in Profits: {months[max_month]} (${str(max_increase)})
 print(f"Greatest Decrease in Profits: {months[min_month]} (${str(max_decrease)})")
 
 # Export a text file with the results 
-file = open('Financial_Analysis.txt','w')
-file.write("Financial Analysis" + "\n")
-file.write("----------------------------" + "\n")
-file.write(f"Total Months: {len(months)}" + "\n")
-file.write(f"Total: ${sum(total)}" + "\n")
-file.write(f"Average change: ${round(total_average, 2)}" + "\n")
-file.write(f"Greatest Increase in Profits: {months[max_month]} (${str(max_increase)})" + "\n")
-file.write(f"Greatest Decrease in Profits: {months[min_month]} (${str(max_decrease)})" + "\n")
+output_path = os.path.join('Financial_Analysis')
+with open(output_path, "w", newline="") as txtfile:
+    csvwriter = csv.writer(txtfile,delimiter=',')
+    csvwriter.writerows([
+            ["Financial Analysis"],
+            ["----------------------------"],
+            [f"Total Months: {len(months)}"],
+            [f"Total: ${sum(total)}"],
+            [f"Average Change: ${round(total_average, 2)}"],
+            [f"Greatest Increase in Profits: {months[max_month]} (${str(max_increase)})"],
+            [f"Greatest Decrease in Profits: {months[min_month]} (${str(max_decrease)})"]])
