@@ -62,15 +62,18 @@ print(f"Winner: {candidate_list[winner]}")
 print("----------------------------")
 
 #Export a text file with the results 
-file = open('Election_Results.txt','w')
-file.write("Election Results" + "\n")
-file.write("----------------------------" + "\n")
-file.write(f"Total Votes: {total}"+ "\n")
-file.write("----------------------------" + "\n")
-file.write(f"Khan: {khan_percent:.3f}% ({khan_votes})" + "\n")
-file.write(f"Correy: {correy_percent:.3f}% ({correy_votes})" + "\n")
-file.write(f"Li: {li_percent:.3f}% ({li_votes})" + "\n")
-file.write(f"O'Tooley: {tooley_percent:.3f}% ({tooley_votes})" + "\n")
-file.write("----------------------------" + "\n")
-file.write(f"Winner: {candidate_list[winner]}" + "\n")
-file.write("----------------------------" + "\n")
+output_path = os.path.join('Election_Result')
+with open(output_path, "w", newline="") as txtfile:
+    csvwriter = csv.writer(txtfile,delimiter=',')
+    csvwriter.writerows([
+            ["Election Result"],
+            ["----------------------------"],
+            [f"Total Votes: {total}"],
+            ["----------------------------"],
+            [f"Khan: {khan_percent:.3f}% ({khan_votes})"],
+            [f"Correy: {correy_percent:.3f}% ({correy_votes})"],
+            [f"Li: {li_percent:.3f}% ({li_votes})"],
+            [f"O'Tooley: {tooley_percent:.3f}% ({tooley_votes})"],
+            ["----------------------------"],
+            [f"Winner: {candidate_list[winner]}"],
+            ["----------------------------"]])
